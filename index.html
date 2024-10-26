@@ -33,7 +33,6 @@
             padding: 40px 20px; 
             background-color: var(--tg-theme-secondary-bg-color); 
             position: relative; 
-            overflow: hidden; 
         }
         .header-image {
             position: absolute;
@@ -44,7 +43,6 @@
             height: auto; 
             opacity: 0.25; 
             filter: blur(3px);
-            z-index: 5; 
             border-radius: 50%; /* Make the image a circle */
         }
 
@@ -99,7 +97,6 @@
             font-size: 1.1em;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.2); /* Blue box shadow */
             transition: background 0.3s ease; 
-            display: block; /* Ensures the button takes up full width */
             margin: 0 auto; /* Centers the button */
         }
 
@@ -110,8 +107,9 @@
 
         #ton-connect {
             margin-bottom: 40px; 
-            justify-content: center; /* Centers the TonConnect button */
             z-index: 100;
+            justify-content: center;
+            display: flex;
         }
 
         .features { 
@@ -153,26 +151,11 @@
             transform: rotate(-30deg);
         }
 
-        .airdrop-counter {
-            position: fixed;
-            top: 10px;
-            left: 0;
-            width: 100%;
-            background-color: var(--tg-theme-section-bg-color);
-            color: var(--tg-theme-hint-color);
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 14px;
-            text-align: center; 
-        }
-
         /* Adjust these values for different positions and sizes */
 
     </style>
 </head>
 <body>
-
-    <div class="airdrop-counter" id="airdrop-counter"></div> 
     <div class="header-container">
         <img src="https://cdn3d.iconscout.com/3d/premium/thumb/toncoin-3d-icon-download-in-png-blend-fbx-gltf-file-formats--bitcoin-logo-cryptocurrency-crypto-coin-coins-pack-science-technology-icons-8000674.png" alt="Toncoin Icon" class="header-image">
         <div class="header-content">
